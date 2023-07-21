@@ -1,0 +1,94 @@
+<!-- <form >
+
+  <p-table 
+           >
+
+           </p-table> 
+</form> -->
+
+
+<div class="p-col-12 app-pt-5 app-pb-0">
+  <div class="p-grid">
+    <div class="p-col-5 p-pt-0 p-pb-0">
+      <div class="p-field p-grid" style="float: inline-end; display: block;">
+
+
+
+
+        <div [style]="{ width: _tableWidth+'%'}" style="float: left; " class="p-col"  >
+
+          <div class="p-col-12  appp-pt-5 p-pb-0">
+            <div class="p-grid">
+              <div class="p-col-12  p-pt-0 p-pb-0">
+                <div class="p-field p-grid">
+                  <div class="p-col">
+                    <input type="text" class="form-control" placeholder="Search" id="search"
+                      (keyup)="studentSearchKeyUp($event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+
+                <th (click)="sortName('FirstName')">First Name </th>
+                <th (click)="sortName('LastName')"> Last Name </th>
+                <th (click)="sortName('Mobile')"> Mobile</th>
+                <th (click)="sortName('Email')"> Email</th>
+                <th (click)="sortName('NIC')"> NIC</th>
+                <th> Image</th>
+                <th> Actions </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr (click)="onRowClick(student?.Id)"
+                *ngFor="let student of students | orderBy:key:isAsc | paginate:{itemsPerPage :3,currentPage :currentPage} ">
+
+
+                <td> {{ student?.FirstName }} </td>
+                <td> {{ student?.LastName }} </td>
+                <td> {{ student?.Mobile }} </td>
+                <td> {{ student?.Email }} </td>
+                <td> {{ student?.NIC }} </td>
+
+                <td>
+                  <div class="p-col">
+                    <img *ngIf="!student?.Base64Image" src="./../../../../assets/layout/images/default-image.jpg"
+                      style="height: 50px; width: 50px; border-radius: 3px; border: 1px solid #ced4da;" />
+                    <img *ngIf="student?.Base64Image" [src]="student?.Base64Image"
+                      style="height: 50px; width: 50px; border-radius: 3px; border: 1px solid #ced4da;" />
+                  </div>
+                </td>
+
+                <td>
+                  <button (click)="updateStudent(student?.Id)" class="btn btn-primary"> Update</button>
+                  <button (click)="deleteStudent(student?.Id)" class="btn btn-danger" style="margin-left: 10px">
+                    Delete</button>
+                  <button (click)="studentDetails(student?.Id)" class="btn btn-primary" style="margin-left: 10px">
+                    View</button>
+                </td>
+
+              </tr>
+
+            </tbody>
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+          </table>
+
+        </div>
+
+                
+        <div [hidden]="isDetailShow != true" hidden="isDetailShow" class="search-list-card">
+          <app-student-details [_studentId]="_selectedStudentId" (onRecordSelect)="_selectedStudentId"
+            hightReduceFromInnerHeight="180">
+          </app-student-details>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+

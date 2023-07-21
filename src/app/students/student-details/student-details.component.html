@@ -1,0 +1,33 @@
+<h3> View Student Details</h3>
+
+<div>
+    <div>
+        <label> <b> First Name: </b></label> {{student?.FirstName}}
+    </div>
+    <div>
+        <label> <b> Last Name: </b></label> {{student?.LastName}}
+    </div>
+    <div>
+        <label> <b> Mobile: </b></label> {{student?.Mobile}}
+    </div>
+    <div>
+        <label> <b> Email: </b></label> {{student?.Email}}
+    </div>
+
+    <div>
+        <label> <b> NIC: </b></label> {{student?.NIC}}
+    </div> 
+    <div>
+        <label> <b> Date Of Birth: </b></label> {{student?.DateOfBirth| date: 'dd/MM/yyyy'}}
+    </div> 
+    <div>
+        <label> <b> Address: </b></label> {{student?.Address}}
+    </div>
+
+    <div class="p-col">
+        <img *ngIf="!student?.Base64Image" src="./../../../../assets/layout/images/default-image.jpg"
+          style="height: 100px; width: 100px; border-radius: 3px; border: 1px solid #ced4da;" />
+        <img *ngIf="student?.Base64Image" [src]="student?.Base64Image"
+          style="height: 100px; width: 100px; border-radius: 3px; border: 1px solid #ced4da;" />
+      </div>
+</div>
