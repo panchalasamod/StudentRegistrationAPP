@@ -56,9 +56,18 @@ export class UpdateStudentComponent implements OnInit {
     this.imageChangedEvent = null;
     this.id = this.route.snapshot.params['id'];
 
-
+    this.getStudentById(this.id)
   }
 
+  getStudentById(id: number) {
+    this.studentService.getStudentById(id).subscribe(data => {
+      this.student = data;
+      this.student.DateOfBirth = moment(this.student.DateOfBirth).format('MM/DD/yyyy') 
+      console.log(this.student)
+    }, error => console.log(error));
+  }
+  handler(ec:any){
+  }
 
 
   saveStudent() {
